@@ -1,14 +1,15 @@
-/* 
-DOCUMENTACION LOCAL:
+//http://examples.phaser.io/
 
-file:///var/www/html/phaser-master/docs/index.html
+/* main_app */
 
- */
-
-
-var dudeW = 231.949; dudeH = 202.023;
 var game = new Phaser.Game(960, 640, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
+var dudeW = 231.949; dudeH = 202.023; //agrego
+
+var vivo = false; //agrego
+
+var pantalla = ["cargando","inicio","juego","gameOver", "pausa"];
+var vista = "juego"; //VISTA INICIO
 
 
 function preload() {
@@ -30,6 +31,12 @@ var score = 0;
 var scoreText;
 
 function create() {
+
+
+
+    game.add.tileSprite(0, 0, 1920, 1920, 'sky');
+
+    game.world.setBounds(0, 0, 1920, 1920); //EL PLANO QUE MUESTRA AL PRINCIPIO
 
     //  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -54,14 +61,45 @@ function create() {
     //  This stops it from falling away when you jump on it
     ground.body.immovable = true;
 
+    /* OBSTACULOS */
+
     //  Now let's create two ledges
-    var ledge = platforms.create(600, 300, 'ground');
+
+    var ledge = platforms.create(150, 700, 'ground');
     ledge.body.immovable = true;
 
-    ledge = platforms.create(150, 430, 'ground');
-    ledge.body.immovable = true;
 
-    // The player and its settings
+    ledge[0] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
+    ledge[0].body.immovable = true;
+
+    ledge[1] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
+    ledge[1].body.immovable = true;
+
+    ledge[2] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
+    ledge[2].body.immovable = true;
+
+    ledge[3] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
+    ledge[3].body.immovable = true;
+
+    ledge[4] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
+    ledge[4].body.immovable = true;
+
+    ledge[5] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
+    ledge[5].body.immovable = true;
+
+    ledge[6] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
+    ledge[6].body.immovable = true;
+
+    ledge[7] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
+    ledge[7].body.immovable = true;
+
+    ledge[8] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
+    ledge[8].body.immovable = true;
+
+    /* FIN OBSTACULOS */
+
+
+   // The player and its settings
     player = game.add.sprite(dudeW, dudeH, 'dude');
 
     //  We need to enable physics on the player
@@ -100,10 +138,46 @@ function create() {
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
+
+    game.camera.follow(player);
+
     
-}
+}   
+
 
 function update() {
+
+    /* PANTALLAS */
+    switch(vista) {
+    case pantalla[0]:
+        i = 0;
+        document.write("cargando");
+        //llamo a un archivo js
+        break;
+    case pantalla[1]:
+
+        document.write("inicio");
+        //llamo a archivo js
+        break;
+    case pantalla[2]:
+        vivo = true;
+        //llamo a archivo js
+        break;
+    case pantalla[3]:
+
+        document.write("gameOver");
+        //llamo a archivo js
+        break;
+    case pantalla[4]:
+
+        document.write("pausa");
+        //llamo a archivo js
+        break;
+        
+} 
+    /* FIN PANTALLAS */
+
+    if(vivo){
 
     //  Collide the player and the stars with the platforms
     game.physics.arcade.collide(player, platforms);
@@ -115,8 +189,10 @@ function update() {
     //  Reset the players velocity (movement)
     //player.body.velocity.x = 0;
 
-    player.body.velocity.x = 200;
+    player.body.velocity.x = 300;
     player.animations.play('right');
+
+    }
 
 
     if (cursors.left.isDown)
@@ -124,10 +200,12 @@ function update() {
         //  Move to the left
         //player.body.velocity.x = -150;
 
+
         //player.animations.play('left');
     }
     else if (cursors.right.isDown)
     {
+
         //  Move to the right
         //player.body.velocity.x = 200;
 
@@ -146,8 +224,11 @@ function update() {
     //  Allow the player to jump if they are touching the ground.
     if (cursors.up.isDown && player.body.touching.down)
     {
-        player.body.velocity.y = -350;
+        player.body.velocity.y = -350; //ALTURA / VELOCIDAD DEL SALTO
+
     }
+
+
 
 }
 
@@ -161,3 +242,12 @@ function collectStar (player, star) {
     scoreText.text = 'Score: ' + score;
 
 }
+
+function render() {
+
+    game.debug.cameraInfo(game.camera, 32, 32);
+    game.debug.spriteCoords(player, 32, 500);
+
+}
+
+/* fin main_app */
