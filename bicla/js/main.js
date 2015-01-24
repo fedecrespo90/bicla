@@ -8,6 +8,9 @@ var dudeW = 231.949; dudeH = 202.023; //agrego
 
 var vivo = false; //agrego
 
+var jumpButton;
+
+
 var pantalla = ["cargando","inicio","juego","gameOver", "pausa"];
 var vista = "juego"; //VISTA INICIO
 
@@ -34,9 +37,9 @@ function create() {
 
 
 
-    game.add.tileSprite(0, 0, 1920, 1920, 'sky');
+   // game.add.tileSprite(0, 0, 3840, 1280, 'sky');
 
-    game.world.setBounds(0, 0, 1920, 1920); //EL PLANO QUE MUESTRA AL PRINCIPIO
+    game.world.setBounds(0, 0,1920,1920); 
 
     //  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -64,38 +67,8 @@ function create() {
     /* OBSTACULOS */
 
     //  Now let's create two ledges
-
     var ledge = platforms.create(150, 700, 'ground');
     ledge.body.immovable = true;
-
-
-    ledge[0] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
-    ledge[0].body.immovable = true;
-
-    ledge[1] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
-    ledge[1].body.immovable = true;
-
-    ledge[2] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
-    ledge[2].body.immovable = true;
-
-    ledge[3] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
-    ledge[3].body.immovable = true;
-
-    ledge[4] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
-    ledge[4].body.immovable = true;
-
-    ledge[5] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
-    ledge[5].body.immovable = true;
-
-    ledge[6] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
-    ledge[6].body.immovable = true;
-
-    ledge[7] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
-    ledge[7].body.immovable = true;
-
-    ledge[8] = platforms.create(Math.floor((Math.random() * 1100) + 150), Math.floor((Math.random() * 900) + 700), 'ground');
-    ledge[8].body.immovable = true;
-
     /* FIN OBSTACULOS */
 
 
@@ -140,6 +113,8 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
 
     game.camera.follow(player);
+
+    jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
     
 }   
@@ -189,8 +164,7 @@ function update() {
     //  Reset the players velocity (movement)
     //player.body.velocity.x = 0;
 
-    player.body.velocity.x = 300;
-    player.animations.play('right');
+
 
     }
 
@@ -205,6 +179,8 @@ function update() {
     }
     else if (cursors.right.isDown)
     {
+        player.body.velocity.x = 300;
+        player.animations.play('right');
 
         //  Move to the right
         //player.body.velocity.x = 200;
@@ -224,9 +200,14 @@ function update() {
     //  Allow the player to jump if they are touching the ground.
     if (cursors.up.isDown && player.body.touching.down)
     {
-        player.body.velocity.y = -350; //ALTURA / VELOCIDAD DEL SALTO
+        //player.body.velocity.y = -350; //ALTURA / VELOCIDAD DEL SALTO
 
     }
+
+    if(jumpButton.isDown){
+        player.body.velocity.y = -300;
+    }
+
 
 
 
