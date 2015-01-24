@@ -18,8 +18,8 @@ canvas {
   left: 0;
   border: 1px solid black;
   z-index: 1;
-  width: 600px;
-  height: 360px;
+  width: 900px;
+  height: 660px;
 }
 
 ul {
@@ -38,8 +38,8 @@ a {
 }
 
 .wrapper {
-  width: 600px;
-  height: 360px;
+  width: 900px;
+  height: 660px;
   position: absolute;
   top: 5px;
   left: 5px;
@@ -47,8 +47,8 @@ a {
 
 #menu {
   position: absolute;
-  width: 600px;
-  height: 360px;
+  width: 900px;
+  height: 660px;
   border: 1px solid black;
   z-index: 2;
   text-align: center;
@@ -164,7 +164,7 @@ a {
   text-align: center;
   padding-top: 92px;
   z-index: 1;
-  width: 600px;
-  height: 360px;
+  width: 900px;
+  height: 660px;
   position: absolute;
 }
