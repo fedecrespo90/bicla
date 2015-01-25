@@ -390,8 +390,8 @@ var player = (function(player) {
   // spritesheets
   player.sheet     = new SpriteSheet('imgs/normal_walk.png', player.width, player.height);
   player.walkAnim  = new Animation(player.sheet, 3, 0, 2);
-  player.jumpAnim  = new Animation(player.sheet, 4, 15, 15);
-  player.fallAnim  = new Animation(player.sheet, 4, 11, 11);
+  player.jumpAnim  = new Animation(player.sheet, 8, 6, 9);
+  player.fallAnim  = new Animation(player.sheet, 7, 5, 8);
   player.anim      = player.walkAnim;
 
   Vector.call(player, 0, 0, 0, player.dy);
@@ -588,8 +588,8 @@ function updateEnvironment() {
 function updateEnemies() {
   // animate enemies
   for (var i = 0; i < enemies.length; i++) {
-    enemies[i].update();
-    enemies[i].draw();
+    //enemies[i].update(); SACO LOS ENEMIES
+    //enemies[i].draw();
 
     // player ran into enemy
     if (player.minDist(enemies[i]) <= player.width - platformWidth/2) {
