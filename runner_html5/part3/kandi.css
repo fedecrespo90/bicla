@@ -171,6 +171,23 @@ a {
 /* AGREGO */
 .jugar{
   width: 25%;
-  margin-top: 42%;
+  margin-top: 400px;
+  margin-left: 360px;
+  position: absolute;
+  display: block;  /*LO SACO PARA ACOMODAR EL PERSONAJE*/
+}
+
+.personaje{
+  padding-top: 50px;
+  padding-right:150px
+
+}
+
+.colIzq{
+  float: left;
+}
+
+.colDer{
+  float: right;
 }
 /* FIN AGREGO */
