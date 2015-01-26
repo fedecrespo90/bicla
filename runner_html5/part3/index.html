@@ -10,10 +10,15 @@
   <div class="wrapper">
     <div class="sound sound-off"></div>
     <div id="menu">
+
+    <!--LOADING-->
       <div id="progress">
         <div id="percent">Downloading: <span id="p"></span></div>
         <progress id="progress-bar" value="0"></progress>
       </div>
+      <!--/LOADING-->
+
+      <!--MAIN-->
       <div id="main">
         <h1>JUani Runner</h1>
         <ul>
@@ -21,6 +26,9 @@
           <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
         </ul>
       </div>
+      <!--/MAIN-->
+
+      <!--CREDITOS-->
       <div id="credits">
         <ul>
           <li class="artwork">Character design and art: <a href="http://www.acrylicana.com/">Mary Winkler</a></li>
@@ -37,15 +45,21 @@
         </ul>
         <a href="javascript:void(0)" class="button back">Back</a>
       </div>
+      <!--/CREDITOS-->
     </div>
-    <canvas id="canvas" width="900" height="580">
+    <!--JUEGO-->
+    <canvas id="canvas" width="960" height="640">
       <p>You're browser does not support the required functionality to play this game.</p>
       <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
     </canvas>
+    <!--/JUEGO-->
+
+    <!--gameOver-->
     <div id="game-over">
       <h2>You ran <span id="score"></span> meters!</h2>
       <a href="javascript:void(0)" class="button restart">Try again?</a>
     </div>
+    <!--/gameOver-->
   </div>
   <script type="text/javascript" src="kandi.js"></script>
 </body>

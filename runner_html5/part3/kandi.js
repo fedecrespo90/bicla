@@ -7,7 +7,7 @@ var ground = [], water = [], enemies = [], environment = [];
 
 // platform variables
 var platformHeight, platformLength, gapLength;
-var platformWidth = 32;
+var platformWidth = 32;//Cambio para que se ajuste al platform de Martin. Antes: 32
 var platformBase = canvas.height - platformWidth;  // bottom row of the game
 var platformSpacer = 64;
 
