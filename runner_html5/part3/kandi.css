@@ -168,7 +168,15 @@ a {
   height: 640px;
   position: absolute;
 }
+
 /* AGREGO */
+.nubes{
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  width: 956px;
+}
+
 .jugar{
   width: 25%;
   margin-top: 400px;
@@ -179,8 +187,9 @@ a {
 
 .personaje{
   position: relative;
-  padding-top: 50px;
-  padding-right:150px;
+  margin-right: 150px;
+  margin-top: 70px;
+  overflow: hidden;
 
 }
 

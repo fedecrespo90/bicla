@@ -20,6 +20,7 @@
 
       <!--MAIN-->
       <div id="main">
+        <img src="imgs/cloudss.png" alt="" class="nubes" id="nub">
         <div class="colIzq">
           <a href="javascript:void(0)" class="play"><img class="jugar play" src="imgs/jugar1.png" alt=""></a>
           <a href="javascript:void(0)" class="button credits">Credits</a>          
@@ -66,9 +67,7 @@
   <script type="text/javascript" src="kandi.js"></script>
   <!--ANIMACION PERSONAJE-->
   <script type="text/javascript">
-
   loopear();
-
   function loopear() {
     $( "#per" ).animate({
       top: "+=10",
@@ -81,9 +80,22 @@
       loopear();
       });
       });
-
   }
-   /**/
+
+  loopear_nub();
+  function loopear_nub() {
+    $( "#nub" ).animate({
+      left: "-=8",
+      }, 1000, function() {
+      // Animation complete.
+      $( "#nub" ).animate({
+      left: "+=8",
+      }, 1000, function() {
+      // Animation complete.
+      loopear_nub();
+      });
+      });
+  }
   </script>
   <!--FIN ANIMACION PERSONAJE-->
 </body>
