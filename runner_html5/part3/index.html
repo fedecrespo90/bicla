@@ -25,7 +25,7 @@
           <a href="javascript:void(0)" class="button credits">Credits</a>          
         </div>
         <div class="colDer">
-          <img src="imgs/char.png" class="personaje" alt="">
+          <img src="imgs/char.png" class="personaje" id="per" alt="">
         </div>
       </div>
       <!--/MAIN-->
@@ -64,5 +64,27 @@
     <!--/gameOver-->
   </div>
   <script type="text/javascript" src="kandi.js"></script>
+  <!--ANIMACION PERSONAJE-->
+  <script type="text/javascript">
+
+  loopear();
+
+  function loopear() {
+    $( "#per" ).animate({
+      top: "+=10",
+      }, 1000, function() {
+      // Animation complete.
+      $( "#per" ).animate({
+      top: "-=10",
+      }, 1000, function() {
+      // Animation complete.
+      loopear();
+      });
+      });
+
+  }
+   /**/
+  </script>
+  <!--FIN ANIMACION PERSONAJE-->
 </body>
 </html>

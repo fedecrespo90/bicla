@@ -178,8 +178,9 @@ a {
 }
 
 .personaje{
+  position: relative;
   padding-top: 50px;
-  padding-right:150px
+  padding-right:150px;
 
 }
 
