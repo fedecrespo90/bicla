@@ -24,7 +24,7 @@
         <div class="colIzq">
           <a href="javascript:void(0)" class="play"><img class="jugar play" src="imgs/jugar1.png" alt="" id="jug"></a>
           <a href="javascript:void(0)" class="play"><img class="jugar play" src="imgs/jugar2.png" alt="" id="jug2"></a>
-          <a href="javascript:void(0)" class="button credits">Credits</a>          
+          <!--<a href="javascript:void(0)" class="button credits">Credits</a>-->       
         </div>
         <div class="colDer">
           <img src="imgs/char.png" class="personaje" id="per" alt="">
@@ -61,7 +61,8 @@
     <!--gameOver-->
     <div id="game-over">
       <h2>You ran <span id="score"></span> metters!</h2>
-      <a href="javascript:void(0)" class="restart">Otra vez!</a>
+      <!--<a href="javascript:void(0)" class="restart">Otra vez!</a>-->
+      <a href="javascript:void(0)" class="play"><img class="otraVez play" src="imgs/jugar1.png" alt="" id="jug"></a>
     </div>
     <!--/gameOver-->
   </div>
@@ -75,10 +76,14 @@
       top: "+=10",
       }, 1000, function() {
       // Animation complete.
+      $( "#jug1" ).css( "display", "block");
+      $( "#jug2" ).css( "display", "none");
       $( "#per" ).animate({
       top: "-=10",
       }, 1000, function() {
       // Animation complete.
+      $( "#jug2" ).css( "display", "block");
+      $( "#jug1" ).css( "display", "none");
       loopear_per();
       });
       });
@@ -88,19 +93,21 @@
   function loopear_nub() {
     $( "#nub" ).animate({
       left: "-=8",
-      }, 1000, function() {
+      }, 500, function() {
       // Animation complete.
       $( "#jug2" ).css( "display", "block");
       $( "#jug1" ).css( "display", "none");
       $( "#nub" ).animate({
       left: "+=8",
-      }, 1000, function() {
+      }, 500, function() {
       // Animation complete.
       $( "#jug1" ).css( "display", "block");
       $( "#jug2" ).css( "display", "none");
       loopear_nub();
       });
       });
+
+
   }
   </script>
   <!--FIN ANIMACION PERSONAJE-->

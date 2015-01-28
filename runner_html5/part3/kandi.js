@@ -377,7 +377,7 @@ Vector.prototype.minDist = function(vec) {
 var player = (function(player) {
   // add properties directly to the player imported object
   player.width     = 231.949;
-  player.height    = 202.023;
+  player.height    = 207.023;
   player.speed     = 6;
 
   // jumping
