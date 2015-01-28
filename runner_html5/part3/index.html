@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Juanisucleta Runner</title>
   <link rel="stylesheet" href="kandi.css" type="text/css" media="screen">
-  <script type="text/javascript" src="jquery.2.1.1.min.jsr"></script><!--ROMPO TODO-->
+  <script type="text/javascript" src="jquery.2.1.1.min.js"></script><!--ROMPO TODO-->
 </head>
 <body>
   <div class="wrapper">
@@ -13,7 +13,7 @@
 
     <!--LOADING-->
       <div id="progress">
-        <div id="percent">Cargando <span id="p"></span></div>
+        <div id="percent"><!--<img class="cargando" src="imgs/cargando_bar.png" alt="">--> <span id="p"></span></div>
         <progress id="progress-bar" value="0"></progress>
       </div>
       <!--/LOADING-->
@@ -60,8 +60,8 @@
 
     <!--gameOver-->
     <div id="game-over">
-      <h2>You ran <span id="score"></span> meters!</h2>
-      <a href="javascript:void(0)" class="button restart">Try again?</a>
+      <h2>You ran <span id="score"></span> metters!</h2>
+      <a href="javascript:void(0)" class="restart">Otra vez!</a>
     </div>
     <!--/gameOver-->
   </div>
