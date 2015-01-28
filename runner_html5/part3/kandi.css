@@ -62,12 +62,14 @@ a {
 }
 
 #progress {
-  height: 12%;
+  background-image: url('imgs/cargando.png');
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
 }
 #percent {
+  margin-top: 55%;
+
   color: white;
   font-weight: bold;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -182,7 +184,7 @@ a {
   margin-top: 400px;
   margin-left: 360px;
   position: absolute;
-  display: block;  /*LO SACO PARA ACOMODAR EL PERSONAJE*/
+  /*display: block;  /*LO SACO PARA ACOMODAR EL PERSONAJE*/
 }
 
 .personaje{
