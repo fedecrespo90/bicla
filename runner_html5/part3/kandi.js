@@ -7,7 +7,7 @@ var ground = [], water = [], enemies = [], environment = [];
 
 // platform variables
 var platformHeight, platformLength, gapLength;
-var platformWidth = 32;//Cambio para que se ajuste al platform de Martin. Antes: 32
+var platformWidth = 32;
 var platformBase = canvas.height - platformWidth;  // bottom row of the game
 var platformSpacer = 64;
 
@@ -68,6 +68,10 @@ var assetLoader = (function() {
     'spikes'        : 'imgs/spikes.png',
     'box'           : 'imgs/boxCoin.png',
     'slime'         : 'imgs/slime.png'
+
+    /* OTRO ESTADO */
+    'water2'         : 'imgs/cargando.png'
+    /* FIN OTRO ESTADO */
   };
 
   // sounds dictionary
@@ -556,6 +560,7 @@ function updateWater() {
   for (var i = 0; i < water.length; i++) {
     water[i].update();
     water[i].draw();
+
   }
 
   // remove water that has gone off screen
@@ -588,12 +593,12 @@ function updateEnvironment() {
 function updateEnemies() {
   // animate enemies
   for (var i = 0; i < enemies.length; i++) {
-    //enemies[i].update(); SACO LOS ENEMIES
-    //enemies[i].draw();
+    enemies[i].update();
+    enemies[i].draw();
 
     // player ran into enemy
     if (player.minDist(enemies[i]) <= player.width - platformWidth/2) {
-      gameOver();
+      //gameOver(); SACO LA MUERTE AL COLISIONAR
     }
   }
 
