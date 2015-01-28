@@ -849,6 +849,13 @@ function gameOver() {
   assetLoader.sounds.bg.pause();
   assetLoader.sounds.gameOver.currentTime = 0;
   assetLoader.sounds.gameOver.play();
+
+  $(document).keypress(function(e) {
+    if(e.which == 13) {
+        //alert('You pressed enter!');
+        startGame();
+  	}
+});
 }
 
 /**
@@ -892,6 +899,8 @@ $('.play').click(function() {
   $('#menu').hide();
   startGame();
 });
+
+
 $('.restart').click(function() {
   $('#game-over').hide();
   startGame();
