@@ -3,13 +3,17 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var player, score, stop, ticker;
-var ground = [], water = [], enemies = [], environment = [];
+/*VARIABLES NORMAL*/
+var ground = [], water = [];
+/*VARIABLES ENEMIGOS Y SUSTANCIAS*/
+// DEFAULT: var enemies = [], environment = [];
+var policia = [], Alc = [],Fas = [],Pep = [],Mer = [];
 
-/*DECLARO ARRAYS Y BOOLEANAS DE CADA SUSTANCIA*/
+/*DECLARO ARRAYS Y BOOLEANAS DE CADA SUSTANCIA
 var groundAl = [], waterAl = [], enemiesAl = [], environmentAl = [];
 var groundFa = [], waterFa = [], enemiesFa = [], environmentFa = [];
 var groundPe = [], waterPe = [], enemiesPe = [], environmentPe = [];
-var groundMe = [], waterMe = [], enemiesMe = [], environmentMe = [];
+var groundMe = [], waterMe = [], enemiesMe = [], environmentMe = [];*/
 
 var Al, Fa, Pe, Me;
 
@@ -605,21 +609,72 @@ function getType() {
     }else{
     	type = Math.random() > 0.5 ? 'grass1' : 'grass2';
     }
-    
+
       break;
+
     case 2:
-      type = 'grass';
+
+    if(Al){
+    	type = 'grassAl';
+    }else if(Fa){
+    	type = 'grassFa';
+    }else if(Pe){
+    	type = 'grassPe';
+    }else if(Me){
+    	type = 'grassMe';
+    }else{
+    	//Normal
+    	type = 'grass';
+    }
       break;
+
     case 3:
-      type = 'bridge';
+
+    if(Al){
+    	type = 'bridgeAl';
+	}else if(Fa){
+		type = 'bridgeFa';
+	}else if(Pe){
+		type = 'bridgePe';
+	}else if(Me){
+		type = 'bridgeMe';
+	}else{
+		//Normal
+		type = 'bridge';
+	}
+
       break;
     case 4:
-      type = 'box';
 
+    if(Al){
+    	type = 'boxAl';
+	}else if(Fa){
+		type = 'boxFa';
+	}else if(Pe){
+		type = 'boxPe';
+	}else if(Me){
+		type = 'boxMe';
+	}else{
+		//Normal
+		type = 'box';
+	}
       break;
   }
   if (platformLength === 1 && platformHeight < 3 && rand(0, 3) === 0) {
-    type = 'cliff';
+
+  	if(Al){
+  		type = 'cliffAl';
+	}else if(Fa){
+		type = 'cliffFa';
+	}else if(Pe){
+		type = 'cliffPe';
+	}else if(Me){
+		type = 'cliffMe';
+	}else{
+		//Normal
+    	type = 'cliff';
+	}
+
   }
 
   return type;
