@@ -5,6 +5,14 @@ var ctx = canvas.getContext('2d');
 var player, score, stop, ticker;
 var ground = [], water = [], enemies = [], environment = [];
 
+/*DECLARO MIS ARRAYS*/
+var groundAl = [], waterAl = [], enemiesAl = [], environmentAl = [];
+var groundFa = [], waterFa = [], enemiesFa = [], environmentFa = [];
+var groundPe = [], waterPe = [], enemiesPe = [], environmentPe = [];
+var groundMe = [], waterMe = [], enemiesMe = [], environmentMe = [];
+
+/*FIN DECLARO MIS ARRAYS*/
+
 // platform variables
 var platformHeight, platformLength, gapLength;
 var platformWidth = 32;
@@ -67,11 +75,26 @@ var assetLoader = (function() {
     'cliff'         : 'imgs/grassCliffRight.png',
     'spikes'        : 'imgs/spikes.png',
     'box'           : 'imgs/boxCoin.png',
-    'slime'         : 'imgs/slime.png'
+    'slime'         : 'imgs/slime.png',
 
-    /* OTRO ESTADO */
-    'water2'         : 'imgs/cargando.png'
-    /* FIN OTRO ESTADO */
+    /* Al */
+    'bgAl'            : 'imgs/bgAl.png',
+    'skyAl'           : 'imgs/skyAl.png',
+    'backdropAl'      : 'imgs/backdropAl.png',
+    'backdrop2Al'     : 'imgs/backdrop_groundAl.png',
+    'grassAl'         : 'imgs/grassAl.png',
+    'waterAl'         : 'imgs/waterAl.png',
+    'grass1Al'        : 'imgs/grassMid1Al.png',
+    'grass2Al'        : 'imgs/grassMid2Al.png',
+    'bridgeAl'        : 'imgs/bridgeAl.png',
+    'plantAl'         : 'imgs/plantAl.png',
+    'bush1Al'         : 'imgs/bush1Al.png',
+    'bush2Al'         : 'imgs/bush2Al.png',
+    'cliffAl'         : 'imgs/grassCliffRightAl.png',
+    'spikesAl'        : 'imgs/spikesAl.png',
+    'boxAl'           : 'imgs/boxCoinAl.png',
+    'slimeAl'         : 'imgs/slimeAl.png'
+    /* FIN Me */
   };
 
   // sounds dictionary
