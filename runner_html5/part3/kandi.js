@@ -5,13 +5,20 @@ var ctx = canvas.getContext('2d');
 var player, score, stop, ticker;
 var ground = [], water = [], enemies = [], environment = [];
 
-/*DECLARO MIS ARRAYS*/
+/*DECLARO ARRAYS Y BOOLEANAS DE CADA SUSTANCIA*/
 var groundAl = [], waterAl = [], enemiesAl = [], environmentAl = [];
 var groundFa = [], waterFa = [], enemiesFa = [], environmentFa = [];
 var groundPe = [], waterPe = [], enemiesPe = [], environmentPe = [];
 var groundMe = [], waterMe = [], enemiesMe = [], environmentMe = [];
 
-/*FIN DECLARO MIS ARRAYS*/
+var Al, Fa, Pe, Me;
+
+Al=false;
+Fa=false;
+Pe=false;
+Me=false;
+
+/*FIN DECLARO ARRAYS Y BOOLEANAS DE CADA SUSTANCIA*/
 
 // platform variables
 var platformHeight, platformLength, gapLength;
@@ -93,7 +100,64 @@ var assetLoader = (function() {
     'cliffAl'         : 'imgs/grassCliffRightAl.png',
     'spikesAl'        : 'imgs/spikesAl.png',
     'boxAl'           : 'imgs/boxCoinAl.png',
-    'slimeAl'         : 'imgs/slimeAl.png'
+    'slimeAl'         : 'imgs/slimeAl.png',
+    /* FIN Al */
+
+    /* Fa */
+    'bgFa'            : 'imgs/bgFa.png',
+    'skyFa'           : 'imgs/skyFa.png',
+    'backdropFa'      : 'imgs/backdropFa.png',
+    'backdrop2Fa'     : 'imgs/backdrop_groundFa.png',
+    'grassFa'         : 'imgs/grassFa.png',
+    'waterFa'         : 'imgs/waterFa.png',
+    'grass1Fa'        : 'imgs/grassMid1Fa.png',
+    'grass2Fa'        : 'imgs/grassMid2Fa.png',
+    'bridgeFa'        : 'imgs/bridgeFa.png',
+    'plantFa'         : 'imgs/plantFa.png',
+    'bush1Fa'         : 'imgs/bush1Fa.png',
+    'bush2Fa'         : 'imgs/bush2Fa.png',
+    'cliffFa'         : 'imgs/grassCliffRightFa.png',
+    'spikesFa'        : 'imgs/spikesFa.png',
+    'boxFa'           : 'imgs/boxCoinFa.png',
+    'slimeFa'         : 'imgs/slimeFa.png',
+    /* FIN Fa */
+
+    /* Pe */
+    'bgPe'            : 'imgs/bgPe.png',
+    'skyPe'           : 'imgs/skyPe.png',
+    'backdropPe'      : 'imgs/backdropPe.png',
+    'backdrop2Pe'     : 'imgs/backdrop_groundPe.png',
+    'grassPe'         : 'imgs/grassPe.png',
+    'waterPe'         : 'imgs/waterPe.png',
+    'grass1Pe'        : 'imgs/grassMid1Pe.png',
+    'grass2Pe'        : 'imgs/grassMid2Pe.png',
+    'bridgePe'        : 'imgs/bridgePe.png',
+    'plantPe'         : 'imgs/plantPe.png',
+    'bush1Pe'         : 'imgs/bush1Pe.png',
+    'bush2Pe'         : 'imgs/bush2Pe.png',
+    'cliffPe'         : 'imgs/grassCliffRightPe.png',
+    'spikesPe'        : 'imgs/spikesPe.png',
+    'boxPe'           : 'imgs/boxCoinPe.png',
+    'slimePe'         : 'imgs/slimePe.png',
+    /* FIN Pe */
+
+    /* Me */
+    'bgMe'            : 'imgs/bgMe.png',
+    'skyMe'           : 'imgs/skyMe.png',
+    'backdropMe'      : 'imgs/backdropMe.png',
+    'backdrop2Me'     : 'imgs/backdrop_groundMe.png',
+    'grassMe'         : 'imgs/grassMe.png',
+    'waterMe'         : 'imgs/waterMe.png',
+    'grass1Me'        : 'imgs/grassMid1Me.png',
+    'grass2Me'        : 'imgs/grassMid2Me.png',
+    'bridgeMe'        : 'imgs/bridgeMe.png',
+    'plantMe'         : 'imgs/plantMe.png',
+    'bush1Me'         : 'imgs/bush1Me.png',
+    'bush2Me'         : 'imgs/bush2Me.png',
+    'cliffMe'         : 'imgs/grassCliffRightMe.png',
+    'spikesMe'        : 'imgs/spikesMe.png',
+    'boxMe'           : 'imgs/boxCoinMe.png',
+    'slimeMe'         : 'imgs/slimeMe.png'
     /* FIN Me */
   };
 
@@ -108,6 +172,7 @@ var assetLoader = (function() {
   var numImgs      = Object.keys(this.imgs).length;    // total number of image assets
   var numSounds    = Object.keys(this.sounds).length;  // total number of sound assets
   this.totalAssest = numImgs;                          // total number of assets
+
 
   /**
    * Ensure all assets are loaded before using them
@@ -528,7 +593,19 @@ function getType() {
   switch (platformHeight) {
     case 0:
     case 1:
-      type = Math.random() > 0.5 ? 'grass1' : 'grass2';
+
+    if(Al){
+    	type = Math.random() > 0.5 ? 'grass1Al' : 'grass2Al';
+    }else if(Fa){
+    	type = Math.random() > 0.5 ? 'grass1Fa' : 'grass2Fa';
+    }else if(Pe){
+    	type = Math.random() > 0.5 ? 'grass1Pe' : 'grass2Pe';
+    }else if(Me){
+    	type = Math.random() > 0.5 ? 'grass1Me' : 'grass2Me';
+    }else{
+    	type = Math.random() > 0.5 ? 'grass1' : 'grass2';
+    }
+    
       break;
     case 2:
       type = 'grass';
@@ -538,6 +615,7 @@ function getType() {
       break;
     case 4:
       type = 'box';
+
       break;
   }
   if (platformLength === 1 && platformHeight < 3 && rand(0, 3) === 0) {
