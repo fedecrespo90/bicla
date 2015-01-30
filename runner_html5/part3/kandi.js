@@ -6,14 +6,8 @@ var player, score, stop, ticker;
 /*VARIABLES NORMAL*/
 var ground = [], water = [];
 /*VARIABLES ENEMIGOS Y SUSTANCIAS*/
-// DEFAULT: var enemies = [], environment = [];
-var policia = [], Alc = [],Fas = [],Pep = [],Mer = [];
+var enemies = [], environment = []; //enemies = policia ; environment = sustancias 
 
-/*DECLARO ARRAYS Y BOOLEANAS DE CADA SUSTANCIA
-var groundAl = [], waterAl = [], enemiesAl = [], environmentAl = [];
-var groundFa = [], waterFa = [], enemiesFa = [], environmentFa = [];
-var groundPe = [], waterPe = [], enemiesPe = [], environmentPe = [];
-var groundMe = [], waterMe = [], enemiesMe = [], environmentMe = [];*/
 
 var Al, Fa, Pe, Me;
 
