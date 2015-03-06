@@ -988,9 +988,13 @@ function animate() {
     background.draw();
 
     // update entities
-    if(Al)
+    /*if(Al)
     {
     	updateWaterAl();
+    	updateEnvironment();
+	    updatePlayer();
+	    updateGround();
+	    updateEnemies();
     }else if(Fa)
     {
     	updateWaterFa();
@@ -1000,7 +1004,7 @@ function animate() {
     }else if(Me)
     {
     	updateWaterMe();
-    }/*else
+    }else
     {*/
     	updateWater();
 	    updateEnvironment();
