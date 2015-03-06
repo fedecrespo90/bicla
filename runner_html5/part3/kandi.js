@@ -780,6 +780,70 @@ function updateWater() {
   }
 }
 
+function updateWaterAl() {
+  // animate water
+  for (var i = 0; i < waterAl.length; i++) {
+    waterAl[i].update();
+    waterAl[i].draw();
+
+  }
+
+  // remove water that has gone off screen
+  if (waterAl[0] && waterAl[0].x < -platformWidth) {
+    var wAl = waterAl.splice(0, 1)[0];
+    wAl.x = waterAl[waterAl.length-1].x + platformWidth;
+    waterAl.push(wAl);
+  }
+}
+
+function updateWaterFa() {
+  // animate water
+  for (var i = 0; i < waterFa.length; i++) {
+    waterFa[i].update();
+    waterFa[i].draw();
+
+  }
+
+  // remove water that has gone off screen
+  if (waterFa[0] && waterFa[0].x < -platformWidth) {
+    var wFa = waterFa.splice(0, 1)[0];
+    wFa.x = waterFa[waterFa.length-1].x + platformWidth;
+    waterFa.push(wFa);
+  }
+}
+
+function updateWaterPe() {
+  // animate water
+  for (var i = 0; i < waterPe.length; i++) {
+    waterPe[i].update();
+    waterPe[i].draw();
+
+  }
+
+  // remove water that has gone off screen
+  if (waterPe[0] && waterPe[0].x < -platformWidth) {
+    var wPe = waterPe.splice(0, 1)[0];
+    wPe.x = waterPe[waterPe.length-1].x + platformWidth;
+    waterPe.push(wPe);
+  }
+}
+
+function updateWaterMe() {
+  // animate water
+  for (var i = 0; i < waterMe.length; i++) {
+    waterMe[i].update();
+    waterMe[i].draw();
+
+  }
+
+  // remove water that has gone off screen
+  if (waterMe[0] && waterMe[0].x < -platformWidth) {
+    var wMe = waterMe.splice(0, 1)[0];
+    wMe.x = waterMe[waterMe.length-1].x + platformWidth;
+    waterMe.push(wMe);
+  }
+}
+
 /**
  * Update all environment position and draw.
  */
@@ -795,6 +859,7 @@ function updateEnvironment() {
     environment.splice(0, 1);
   }
 }
+
 
 /**
  * Update all enemies position and draw. Also check for collision against the player.
@@ -923,12 +988,28 @@ function animate() {
     background.draw();
 
     // update entities
-    updateWater();
-    updateEnvironment();
-    updatePlayer();
-    updateGround();
-    updateEnemies();
+    if(Al)
+    {
+    	updateWaterAl();
+    }else if(Fa)
+    {
+    	updateWaterFa();
+    }else if(Pe)
+    {
+    	updateWaterPe();
+    }else if(Me)
+    {
+    	updateWaterMe();
+    }/*else
+    {*/
+    	updateWater();
+	    updateEnvironment();
+	    updatePlayer();
+	    updateGround();
+	    updateEnemies();
 
+    /*}*/
+    
     // draw the score
     ctx.fillText('Score: ' + score + 'm', canvas.width - 140, 30);
 
