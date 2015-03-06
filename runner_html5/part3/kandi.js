@@ -3,7 +3,20 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var player, score, stop, ticker;
-var ground = [], water = [], enemies = [], environment = [];
+/*VARIABLES NORMAL*/
+var ground = [], water = [];
+/*VARIABLES ENEMIGOS Y SUSTANCIAS*/
+var enemies = [], environment = []; //enemies = policia ; environment = sustancias 
+
+
+var Al, Fa, Pe, Me;
+
+Al=false;
+Fa=false;
+Pe=false;
+Me=false;
+
+/*FIN DECLARO ARRAYS Y BOOLEANAS DE CADA SUSTANCIA*/
 
 // platform variables
 var platformHeight, platformLength, gapLength;
@@ -51,6 +64,8 @@ function bound(num, low, high) {
 var assetLoader = (function() {
   // images dictionary
   this.imgs        = {
+
+    /* Normal */
     'bg'            : 'imgs/bg.png',
     'sky'           : 'imgs/sky.png',
     'backdrop'      : 'imgs/backdrop.png',
@@ -67,24 +82,95 @@ var assetLoader = (function() {
     'cliff'         : 'imgs/grassCliffRight.png',
     'spikes'        : 'imgs/spikes.png',
     'box'           : 'imgs/boxCoin.png',
-    'slime'         : 'imgs/slime.png'
+    'slime'         : 'imgs/slime.png',
+    'slimeFa'         : 'imgs/slimeFa.png',
+    'slimePe'         : 'imgs/slimePe.png',
+    'slimeMe'         : 'imgs/slimeMe.png',
+    /*FIN  Normal */
 
-    /* OTRO ESTADO */
-    'water2'         : 'imgs/cargando.png'
-    /* FIN OTRO ESTADO */
+    /* Al */
+    'bgAl'            : 'imgs/al/bg.png',
+    'skyAl'           : 'imgs/al/sky.png',
+    'backdropAl'      : 'imgs/al/backdrop.png',
+    'backdrop2Al'     : 'imgs/al/backdrop_ground.png',
+    'grassAl'         : 'imgs/al/grass.png',
+    'waterAl'         : 'imgs/al/water.png',
+    'grass1Al'        : 'imgs/al/grassMid1.png',
+    'grass2Al'        : 'imgs/al/grassMid2.png',
+    'bridgeAl'        : 'imgs/al/bridge.png',
+    'plantAl'         : 'imgs/al/plant.png',
+    'bush1Al'         : 'imgs/al/bush1.png',
+    'bush2Al'         : 'imgs/al/bush2.png',
+    'cliffAl'         : 'imgs/al/grassCliffRight.png',
+    'boxAl'           : 'imgs/al/boxCoin.png',
+    /* FIN Al */
+
+    /* Fa */
+    'bgFa'            : 'imgs/fa/bg.png',
+    'skyFa'           : 'imgs/fa/sky.png',
+    'backdropFa'      : 'imgs/fa/backdrop.png',
+    'backdrop2Fa'     : 'imgs/fa/backdrop_ground.png',
+    'grassFa'         : 'imgs/fa/grass.png',
+    'waterFa'         : 'imgs/fa/water.png',
+    'grass1Fa'        : 'imgs/fa/grassMid1.png',
+    'grass2Fa'        : 'imgs/fa/grassMid2.png',
+    'bridgeFa'        : 'imgs/fa/bridge.png',
+    'plantFa'         : 'imgs/fa/plant.png',
+    'bush1Fa'         : 'imgs/fa/bush1.png',
+    'bush2Fa'         : 'imgs/fa/bush2.png',
+    'cliffFa'         : 'imgs/fa/grassCliffRight.png',
+    'boxFa'           : 'imgs/fa/boxCoin.png',
+    /* FIN Fa */
+
+    /* Pe */
+    'bgPe'            : 'imgs/pe/bg.png',
+    'skyPe'           : 'imgs/pe/sky.png',
+    'backdropPe'      : 'imgs/pe/backdrop.png',
+    'backdrop2Pe'     : 'imgs/pe/backdrop_ground.png',
+    'grassPe'         : 'imgs/pe/grass.png',
+    'waterPe'         : 'imgs/pe/water.png',
+    'grass1Pe'        : 'imgs/pe/grassMid1.png',
+    'grass2Pe'        : 'imgs/pe/grassMid2.png',
+    'bridgePe'        : 'imgs/pe/bridge.png',
+    'plantPe'         : 'imgs/pe/plant.png',
+    'bush1Pe'         : 'imgs/pe/bush1.png',
+    'bush2Pe'         : 'imgs/pe/bush2.png',
+    'cliffPe'         : 'imgs/pe/grassCliffRight.png',
+    'boxPe'           : 'imgs/pe/boxCoin.png',
+    /* FIN Pe */
+
+    /* Me */
+    'bgMe'            : 'imgs/me/bg.png',
+    'skyMe'           : 'imgs/me/sky.png',
+    'backdropMe'      : 'imgs/me/backdrop.png',
+    'backdrop2Me'     : 'imgs/me/backdrop_ground.png',
+    'grassMe'         : 'imgs/me/grass.png',
+    'waterMe'         : 'imgs/me/water.png',
+    'grass1Me'        : 'imgs/me/grassMid1.png',
+    'grass2Me'        : 'imgs/me/grassMid2.png',
+    'bridgeMe'        : 'imgs/me/bridge.png',
+    'plantMe'         : 'imgs/me/plant.png',
+    'bush1Me'         : 'imgs/me/bush1.png',
+    'bush2Me'         : 'imgs/me/bush2.png',
+    'cliffMe'         : 'imgs/me/grassCliffRight.png',
+    'boxMe'           : 'imgs/me/boxCoin.png'
+    /* FIN Me */
   };
 
   // sounds dictionary
   this.sounds      = {
     'bg'            : 'sounds/bg.mp3',
     'jump'          : 'sounds/jump.mp3',
-    'gameOver'      : 'sounds/gameOver.mp3'
+    'gameOver'      : 'sounds/gameOver.mp3',
+
+    'bgAl'            : 'sounds/bgAl.mp3'
   };
 
   var assetsLoaded = 0;                                // how many assets have been loaded
   var numImgs      = Object.keys(this.imgs).length;    // total number of image assets
   var numSounds    = Object.keys(this.sounds).length;  // total number of sound assets
   this.totalAssest = numImgs;                          // total number of assets
+
 
   /**
    * Ensure all assets are loaded before using them
@@ -265,43 +351,89 @@ function Animation(spritesheet, frameSpeed, startFrame, endFrame) {
  */
 var background = (function() {
   var sky   = {};
+
+  var skyAl   = {};
+  
   var backdrop = {};
   var backdrop2 = {};
+
+  var backdropAl = {};
+  var backdrop2Al = {};
 
   /**
    * Draw the backgrounds to the screen at different speeds
    */
   this.draw = function() {
-    ctx.drawImage(assetLoader.imgs.bg, 0, 0);
-
-    // Pan background
-    sky.x -= sky.speed;
-    backdrop.x -= backdrop.speed;
-    backdrop2.x -= backdrop2.speed;
 
     // draw images side by side to loop
-    ctx.drawImage(assetLoader.imgs.sky, sky.x, sky.y);
-    ctx.drawImage(assetLoader.imgs.sky, sky.x + canvas.width, sky.y);
+    if(Al){
+      skyAl.x -= skyAl.speed;
 
-    ctx.drawImage(assetLoader.imgs.backdrop, backdrop.x, backdrop.y);
-    ctx.drawImage(assetLoader.imgs.backdrop, backdrop.x + canvas.width, backdrop.y);
+      backdropAl.x -= backdropAl.speed;
+      backdrop2Al.x -= backdrop2Al.speed;
 
-    ctx.drawImage(assetLoader.imgs.backdrop2, backdrop2.x, backdrop2.y);
-    ctx.drawImage(assetLoader.imgs.backdrop2, backdrop2.x + canvas.width, backdrop2.y);
+      ctx.drawImage(assetLoader.imgs.bg, 0, 0);
 
-    // If the image scrolled off the screen, reset
+      ctx.drawImage(assetLoader.imgs.skyAl, skyAl.x, skyAl.y);
+      ctx.drawImage(assetLoader.imgs.skyAl, skyAl.x + canvas.width, skyAl.y);
+
+      assetLoader.sounds.bgAl.play();
+
+      assetLoader.sounds.bg.pause();
+
+      ctx.drawImage(assetLoader.imgs.backdropAl, backdropAl.x, backdropAl.y);
+      ctx.drawImage(assetLoader.imgs.backdropAl, backdropAl.x + canvas.width, backdropAl.y);
+
+      ctx.drawImage(assetLoader.imgs.backdrop2Al, backdrop2Al.x, backdrop2Al.y);
+      ctx.drawImage(assetLoader.imgs.backdrop2Al, backdrop2Al.x + canvas.width, backdrop2Al.y);
+
+    if (skyAl.x + assetLoader.imgs.skyAl.width <= 0)
+      skyAl.x = 0;
+    if (backdropAl.x + assetLoader.imgs.backdropAl.width <= 0)
+      backdropAl.x = 0;
+    if (backdrop2Al.x + assetLoader.imgs.backdrop2Al.width <= 0)
+      backdrop2Al.x = 0;
+
+    }else if(Fa){
+
+    }else if(Pe){
+
+    }else if(Me){
+
+    }else{
+      // Pan background
+      sky.x -= sky.speed;
+      backdrop.x -= backdrop.speed;
+      backdrop2.x -= backdrop2.speed;
+
+      ctx.drawImage(assetLoader.imgs.bg, 0, 0);
+
+      ctx.drawImage(assetLoader.imgs.sky, sky.x, sky.y);
+      ctx.drawImage(assetLoader.imgs.sky, sky.x + canvas.width, sky.y);
+      ctx.drawImage(assetLoader.imgs.backdrop, backdrop.x, backdrop.y);
+      ctx.drawImage(assetLoader.imgs.backdrop, backdrop.x + canvas.width, backdrop.y);
+
+      ctx.drawImage(assetLoader.imgs.backdrop2, backdrop2.x, backdrop2.y);
+      ctx.drawImage(assetLoader.imgs.backdrop2, backdrop2.x + canvas.width, backdrop2.y);
+
+      // If the image scrolled off the screen, reset
     if (sky.x + assetLoader.imgs.sky.width <= 0)
-      sky.x = 0;
+       sky.x = 0;
     if (backdrop.x + assetLoader.imgs.backdrop.width <= 0)
       backdrop.x = 0;
     if (backdrop2.x + assetLoader.imgs.backdrop2.width <= 0)
       backdrop2.x = 0;
+    }
   };
 
   /**
    * Reset background to zero
    */
   this.reset = function()  {
+    skyAl.x = 0;
+    skyAl.y = 0;
+    skyAl.speed = 0.2;
+
     sky.x = 0;
     sky.y = 0;
     sky.speed = 0.2;
@@ -313,6 +445,19 @@ var background = (function() {
     backdrop2.x = 0;
     backdrop2.y = 0;
     backdrop2.speed = 0.6;
+
+    backdropAl.x = 0;
+    backdropAl.y = 0;
+    backdropAl.speed = 0.4;
+
+    backdrop2Al.x = 0;
+    backdrop2Al.y = 0;
+    backdrop2Al.speed = 0.6;
+
+    Al=false;
+    Fa=false;
+    Pe=false;
+    Me=false;
   }
 
   return {
@@ -505,20 +650,84 @@ function getType() {
   switch (platformHeight) {
     case 0:
     case 1:
-      type = Math.random() > 0.5 ? 'grass1' : 'grass2';
+
+    if(Al){
+    	type = Math.random() > 0.5 ? 'grass1Al' : 'grass2Al';
+    }else if(Fa){
+    	type = Math.random() > 0.5 ? 'grass1Fa' : 'grass2Fa';
+    }else if(Pe){
+    	type = Math.random() > 0.5 ? 'grass1Pe' : 'grass2Pe';
+    }else if(Me){
+    	type = Math.random() > 0.5 ? 'grass1Me' : 'grass2Me';
+    }else{
+    	type = Math.random() > 0.5 ? 'grass1' : 'grass2';
+    }
+
       break;
+
     case 2:
-      type = 'grass';
+
+    if(Al){
+    	type = 'grassAl';
+    }else if(Fa){
+    	type = 'grassFa';
+    }else if(Pe){
+    	type = 'grassPe';
+    }else if(Me){
+    	type = 'grassMe';
+    }else{
+    	//Normal
+    	type = 'grass';
+    }
       break;
+
     case 3:
-      type = 'bridge';
+
+    if(Al){
+    	type = 'bridgeAl';
+	}else if(Fa){
+		type = 'bridgeFa';
+	}else if(Pe){
+		type = 'bridgePe';
+	}else if(Me){
+		type = 'bridgeMe';
+	}else{
+		//Normal
+		type = 'bridge';
+	}
+
       break;
     case 4:
-      type = 'box';
+
+    if(Al){
+    	type = 'boxAl';
+	}else if(Fa){
+		type = 'boxFa';
+	}else if(Pe){
+		type = 'boxPe';
+	}else if(Me){
+		type = 'boxMe';
+	}else{
+		//Normal
+		type = 'box';
+	}
       break;
   }
   if (platformLength === 1 && platformHeight < 3 && rand(0, 3) === 0) {
-    type = 'cliff';
+
+  	if(Al){
+  		type = 'cliffAl';
+	}else if(Fa){
+		type = 'cliffFa';
+	}else if(Pe){
+		type = 'cliffPe';
+	}else if(Me){
+		type = 'cliffMe';
+	}else{
+		//Normal
+    	type = 'cliff';
+	}
+
   }
 
   return type;
@@ -571,6 +780,70 @@ function updateWater() {
   }
 }
 
+function updateWaterAl() {
+  // animate water
+  for (var i = 0; i < waterAl.length; i++) {
+    waterAl[i].update();
+    waterAl[i].draw();
+
+  }
+
+  // remove water that has gone off screen
+  if (waterAl[0] && waterAl[0].x < -platformWidth) {
+    var wAl = waterAl.splice(0, 1)[0];
+    wAl.x = waterAl[waterAl.length-1].x + platformWidth;
+    waterAl.push(wAl);
+  }
+}
+
+function updateWaterFa() {
+  // animate water
+  for (var i = 0; i < waterFa.length; i++) {
+    waterFa[i].update();
+    waterFa[i].draw();
+
+  }
+
+  // remove water that has gone off screen
+  if (waterFa[0] && waterFa[0].x < -platformWidth) {
+    var wFa = waterFa.splice(0, 1)[0];
+    wFa.x = waterFa[waterFa.length-1].x + platformWidth;
+    waterFa.push(wFa);
+  }
+}
+
+function updateWaterPe() {
+  // animate water
+  for (var i = 0; i < waterPe.length; i++) {
+    waterPe[i].update();
+    waterPe[i].draw();
+
+  }
+
+  // remove water that has gone off screen
+  if (waterPe[0] && waterPe[0].x < -platformWidth) {
+    var wPe = waterPe.splice(0, 1)[0];
+    wPe.x = waterPe[waterPe.length-1].x + platformWidth;
+    waterPe.push(wPe);
+  }
+}
+
+function updateWaterMe() {
+  // animate water
+  for (var i = 0; i < waterMe.length; i++) {
+    waterMe[i].update();
+    waterMe[i].draw();
+
+  }
+
+  // remove water that has gone off screen
+  if (waterMe[0] && waterMe[0].x < -platformWidth) {
+    var wMe = waterMe.splice(0, 1)[0];
+    wMe.x = waterMe[waterMe.length-1].x + platformWidth;
+    waterMe.push(wMe);
+  }
+}
+
 /**
  * Update all environment position and draw.
  */
@@ -587,6 +860,7 @@ function updateEnvironment() {
   }
 }
 
+
 /**
  * Update all enemies position and draw. Also check for collision against the player.
  */
@@ -597,8 +871,10 @@ function updateEnemies() {
     enemies[i].draw();
 
     // player ran into enemy
-    if (player.minDist(enemies[i]) <= player.width - platformWidth/2) {
+    if (player.minDist(enemies[i])+100 <= player.width - platformWidth/2) {
       //gameOver(); SACO LA MUERTE AL COLISIONAR
+      //alert("CAMBIO DE VISTA");
+      Al=true;
     }
   }
 
@@ -712,12 +988,32 @@ function animate() {
     background.draw();
 
     // update entities
-    updateWater();
-    updateEnvironment();
-    updatePlayer();
-    updateGround();
-    updateEnemies();
+    /*if(Al)
+    {
+    	updateWaterAl();
+    	updateEnvironment();
+	    updatePlayer();
+	    updateGround();
+	    updateEnemies();
+    }else if(Fa)
+    {
+    	updateWaterFa();
+    }else if(Pe)
+    {
+    	updateWaterPe();
+    }else if(Me)
+    {
+    	updateWaterMe();
+    }else
+    {*/
+    	updateWater();
+	    updateEnvironment();
+	    updatePlayer();
+	    updateGround();
+	    updateEnemies();
 
+    /*}*/
+    
     // draw the score
     ctx.fillText('Score: ' + score + 'm', canvas.width - 140, 30);
 
@@ -842,6 +1138,10 @@ function startGame() {
   assetLoader.sounds.bg.currentTime = 0;
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();
+
+  assetLoader.sounds.bgAl.currentTime = 0;
+  assetLoader.sounds.bgAl.loop = true;
+
 }
 
 /**
@@ -852,6 +1152,11 @@ function gameOver() {
   $('#score').html(score);
   $('#game-over').show();
   assetLoader.sounds.bg.pause();
+
+  if (Al) {
+    assetLoader.sounds.bgAl.pause();
+  };
+
   assetLoader.sounds.gameOver.currentTime = 0;
   assetLoader.sounds.gameOver.play();
 
