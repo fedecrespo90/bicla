@@ -996,7 +996,7 @@ function spawnEnemySprites() {
     enemies.push(new Sprite(
       canvas.width + platformWidth % player.speed,
       platformBase - platformHeight * platformSpacer - platformWidth,
-      Math.random() > 0.5 ? 'spikes' : 'slime', 'slimeFa'
+      Math.random() > 0.5 ? 'spikes'
     ));
   }
 }
