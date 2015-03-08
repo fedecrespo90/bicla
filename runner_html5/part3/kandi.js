@@ -6,7 +6,8 @@ var player, score, stop, ticker;
 /*VARIABLES NORMAL*/
 var ground = [], water = [];
 /*VARIABLES ENEMIGOS Y SUSTANCIAS*/
-var enemies = [], environment = []; //enemies = policia ; environment = sustancias 
+var enemies = [], environment = [], sustancias = []; //enemies = policia ; environment = sustancias 
+
 
 
 var Al, Fa, Pe, Me;
@@ -873,14 +874,34 @@ function updateEnemies() {
     // player ran into enemy
     if (player.minDist(enemies[i])+100 <= player.width - platformWidth/2) {
       //gameOver(); SACO LA MUERTE AL COLISIONAR
-      //alert("CAMBIO DE VISTA");
-      Al=true;
+      alert("MUERTE");
     }
   }
 
   // remove enemies that have gone off screen
   if (enemies[0] && enemies[0].x < -platformWidth) {
     enemies.splice(0, 1);
+  }
+}
+
+// UPDATE SUSTANCIAS
+
+function updateSustancias() {
+  // animate sustancias
+  for (var i = 0; i < sustancias.length; i++) {
+    sustancias[i].update();
+    sustancias[i].draw();
+
+    // player ran into Sustancia
+    if (player.minDist(sustancias[i])+100 <= player.width - platformWidth/2) {
+      //gameOver(); SACO LA MUERTE AL COLISIONAR
+      alert("CAMBIO DE VISTA");
+    }
+  }
+
+  // remove sustancias that have gone off screen
+  if (sustancias[0] && sustancias[0].x < -platformWidth) {
+    sustancias.splice(0, 1);
   }
 }
 
@@ -924,6 +945,9 @@ function spawnSprites() {
 
     // add random enemies
     spawnEnemySprites();
+
+    // add random sustancias
+    spawnSustanciasSprites();
   }
   // start over
   else {
@@ -972,7 +996,22 @@ function spawnEnemySprites() {
     enemies.push(new Sprite(
       canvas.width + platformWidth % player.speed,
       platformBase - platformHeight * platformSpacer - platformWidth,
-      Math.random() > 0.5 ? 'spikes' : 'slime'
+      Math.random() > 0.5 ? 'spikes' : 'slime', 'slimeFa'
+    ));
+  }
+}
+
+/**
+ * Spawn new Sustancias sprites off screen
+ */
+function spawnSustanciasSprites() {
+  if (score > 100 && Math.random() > 0.96 && sustancias.length < 3 && platformLength > 5 &&
+      (sustancias.length ? canvas.width - sustancias[sustancias.length-1].x >= platformWidth * 3 ||
+       canvas.width - sustancias[sustancias.length-1].x < platformWidth : true)) {
+    sustancias.push(new Sprite(
+      canvas.width + platformWidth % player.speed,
+      platformBase - platformHeight * platformSpacer - platformWidth,
+      Math.random() > 0.5 ? 'slimeAl' : 'slimeFa'
     ));
   }
 }
@@ -1011,6 +1050,7 @@ function animate() {
 	    updatePlayer();
 	    updateGround();
 	    updateEnemies();
+	    updateSustancias();
 
     /*}*/
     
