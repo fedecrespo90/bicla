@@ -6,7 +6,7 @@ var player, score, stop, ticker;
 /*VARIABLES NORMAL*/
 var ground = [], water = [];
 /*VARIABLES ENEMIGOS Y SUSTANCIAS*/
-var enemies = [], environment = [], sustancias = []; //enemies = policia ; environment = sustancias 
+var enemies = [], environment = []; //enemies = policia ; environment = sustancias 
 
 
 
@@ -781,69 +781,7 @@ function updateWater() {
   }
 }
 
-function updateWaterAl() {
-  // animate water
-  for (var i = 0; i < waterAl.length; i++) {
-    waterAl[i].update();
-    waterAl[i].draw();
 
-  }
-
-  // remove water that has gone off screen
-  if (waterAl[0] && waterAl[0].x < -platformWidth) {
-    var wAl = waterAl.splice(0, 1)[0];
-    wAl.x = waterAl[waterAl.length-1].x + platformWidth;
-    waterAl.push(wAl);
-  }
-}
-
-function updateWaterFa() {
-  // animate water
-  for (var i = 0; i < waterFa.length; i++) {
-    waterFa[i].update();
-    waterFa[i].draw();
-
-  }
-
-  // remove water that has gone off screen
-  if (waterFa[0] && waterFa[0].x < -platformWidth) {
-    var wFa = waterFa.splice(0, 1)[0];
-    wFa.x = waterFa[waterFa.length-1].x + platformWidth;
-    waterFa.push(wFa);
-  }
-}
-
-function updateWaterPe() {
-  // animate water
-  for (var i = 0; i < waterPe.length; i++) {
-    waterPe[i].update();
-    waterPe[i].draw();
-
-  }
-
-  // remove water that has gone off screen
-  if (waterPe[0] && waterPe[0].x < -platformWidth) {
-    var wPe = waterPe.splice(0, 1)[0];
-    wPe.x = waterPe[waterPe.length-1].x + platformWidth;
-    waterPe.push(wPe);
-  }
-}
-
-function updateWaterMe() {
-  // animate water
-  for (var i = 0; i < waterMe.length; i++) {
-    waterMe[i].update();
-    waterMe[i].draw();
-
-  }
-
-  // remove water that has gone off screen
-  if (waterMe[0] && waterMe[0].x < -platformWidth) {
-    var wMe = waterMe.splice(0, 1)[0];
-    wMe.x = waterMe[waterMe.length-1].x + platformWidth;
-    waterMe.push(wMe);
-  }
-}
 
 /**
  * Update all environment position and draw.
@@ -874,7 +812,7 @@ function updateEnemies() {
     // player ran into enemy
     if (player.minDist(enemies[i])+100 <= player.width - platformWidth/2) {
       //gameOver(); SACO LA MUERTE AL COLISIONAR
-      alert("MUERTE");
+      //alert("MUERTE");
     }
   }
 
@@ -884,26 +822,7 @@ function updateEnemies() {
   }
 }
 
-// UPDATE SUSTANCIAS
 
-function updateSustancias() {
-  // animate sustancias
-  for (var i = 0; i < sustancias.length; i++) {
-    sustancias[i].update();
-    sustancias[i].draw();
-
-    // player ran into Sustancia
-    if (player.minDist(sustancias[i])+100 <= player.width - platformWidth/2) {
-      //gameOver(); SACO LA MUERTE AL COLISIONAR
-      alert("CAMBIO DE VISTA");
-    }
-  }
-
-  // remove sustancias that have gone off screen
-  if (sustancias[0] && sustancias[0].x < -platformWidth) {
-    sustancias.splice(0, 1);
-  }
-}
 
 /**
  * Update the players position and draw
@@ -946,8 +865,6 @@ function spawnSprites() {
     // add random enemies
     spawnEnemySprites();
 
-    // add random sustancias
-    spawnSustanciasSprites();
   }
   // start over
   else {
@@ -996,22 +913,7 @@ function spawnEnemySprites() {
     enemies.push(new Sprite(
       canvas.width + platformWidth % player.speed,
       platformBase - platformHeight * platformSpacer - platformWidth,
-      Math.random() > 0.5 ? 'spikes'
-    ));
-  }
-}
-
-/**
- * Spawn new Sustancias sprites off screen
- */
-function spawnSustanciasSprites() {
-  if (score > 100 && Math.random() > 0.96 && sustancias.length < 3 && platformLength > 5 &&
-      (sustancias.length ? canvas.width - sustancias[sustancias.length-1].x >= platformWidth * 3 ||
-       canvas.width - sustancias[sustancias.length-1].x < platformWidth : true)) {
-    sustancias.push(new Sprite(
-      canvas.width + platformWidth % player.speed,
-      platformBase - platformHeight * platformSpacer - platformWidth,
-      Math.random() > 0.5 ? 'slimeAl' : 'slimeFa'
+      Math.random() > 0.3 ? 'spikes': 'slime'
     ));
   }
 }
@@ -1050,7 +952,6 @@ function animate() {
 	    updatePlayer();
 	    updateGround();
 	    updateEnemies();
-	    updateSustancias();
 
     /*}*/
     
@@ -1199,12 +1100,6 @@ function gameOver() {
 
   assetLoader.sounds.gameOver.currentTime = 0;
   assetLoader.sounds.gameOver.play();
-
-  $(document).keypress(function(e) {
-    if(e.which == 13) {
-        alert('You pressed enter!');
-  	}
-});
 }
 
 /**
