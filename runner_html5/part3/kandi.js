@@ -354,12 +354,27 @@ var background = (function() {
   var sky   = {};
 
   var skyAl   = {};
-  
+
+  var skyFa   = {};
+
+  var skyPe   = {};
+
+  var skyMe   = {};
+
   var backdrop = {};
   var backdrop2 = {};
 
   var backdropAl = {};
   var backdrop2Al = {};
+
+  var backdropFa = {};
+  var backdrop2Fa = {};
+
+  var backdropPe = {};
+  var backdrop2Pe = {};
+
+  var backdropMe = {};
+  var backdrop2Me = {};
 
   /**
    * Draw the backgrounds to the screen at different speeds
@@ -373,7 +388,7 @@ var background = (function() {
       backdropAl.x -= backdropAl.speed;
       backdrop2Al.x -= backdrop2Al.speed;
 
-      ctx.drawImage(assetLoader.imgs.bg, 0, 0);
+      ctx.drawImage(assetLoader.imgs.bgAl, 0, 0);
 
       ctx.drawImage(assetLoader.imgs.skyAl, skyAl.x, skyAl.y);
       ctx.drawImage(assetLoader.imgs.skyAl, skyAl.x + canvas.width, skyAl.y);
@@ -381,6 +396,9 @@ var background = (function() {
       assetLoader.sounds.bgAl.play();
 
       assetLoader.sounds.bg.pause();
+      assetLoader.sounds.bgFa.pause();
+      assetLoader.sounds.bgPe.pause();
+      assetLoader.sounds.bgMe.pause();
 
       ctx.drawImage(assetLoader.imgs.backdropAl, backdropAl.x, backdropAl.y);
       ctx.drawImage(assetLoader.imgs.backdropAl, backdropAl.x + canvas.width, backdropAl.y);
@@ -397,9 +415,98 @@ var background = (function() {
 
     }else if(Fa){
 
+    	skyFa.x -= skyFa.speed;
+
+      backdropFa.x -= backdropFa.speed;
+      backdrop2Fa.x -= backdrop2Fa.speed;
+
+      ctx.drawImage(assetLoader.imgs.bgFa, 0, 0);
+
+      ctx.drawImage(assetLoader.imgs.skyFa, skyFa.x, skyFa.y);
+      ctx.drawImage(assetLoader.imgs.skyFa, skyFa.x + canvas.width, skyFa.y);
+
+      assetLoader.sounds.bgFa.play();
+
+      assetLoader.sounds.bg.pause();
+      assetLoader.sounds.bgAl.pause();
+      assetLoader.sounds.bgPe.pause();
+      assetLoader.sounds.bgMe.pause();
+
+      ctx.drawImage(assetLoader.imgs.backdropFa, backdropFa.x, backdropFa.y);
+      ctx.drawImage(assetLoader.imgs.backdropFa, backdropFa.x + canvas.width, backdropFa.y);
+
+      ctx.drawImage(assetLoader.imgs.backdrop2Fa, backdrop2Fa.x, backdrop2Fa.y);
+      ctx.drawImage(assetLoader.imgs.backdrop2Fa, backdrop2Fa.x + canvas.width, backdrop2Fa.y);
+
+    if (skyFa.x + assetLoader.imgs.skyFa.width <= 0)
+      skyFa.x = 0;
+    if (backdropFa.x + assetLoader.imgs.backdropFa.width <= 0)
+      backdropFa.x = 0;
+    if (backdrop2Fa.x + assetLoader.imgs.backdrop2Fa.width <= 0)
+      backdrop2Fa.x = 0;
+
     }else if(Pe){
 
+      skyPe.x -= skyPe.speed;
+
+      backdropPe.x -= backdropPe.speed;
+      backdrop2Pe.x -= backdrop2Pe.speed;
+
+      ctx.drawImage(assetLoader.imgs.bgPe, 0, 0);
+
+      ctx.drawImage(assetLoader.imgs.skyPe, skyPe.x, skyPe.y);
+      ctx.drawImage(assetLoader.imgs.skyPe, skyPe.x + canvas.width, skyPe.y);
+
+      assetLoader.sounds.bgPe.play();
+
+      assetLoader.sounds.bg.pause();
+      assetLoader.sounds.bgAl.pause();
+      assetLoader.sounds.bgFa.pause();
+      assetLoader.sounds.bgMe.pause();
+
+      ctx.drawImage(assetLoader.imgs.backdropPe, backdropPe.x, backdropPe.y);
+      ctx.drawImage(assetLoader.imgs.backdropPe, backdropPe.x + canvas.width, backdropPe.y);
+
+      ctx.drawImage(assetLoader.imgs.backdrop2Pe, backdrop2Pe.x, backdrop2Pe.y);
+      ctx.drawImage(assetLoader.imgs.backdrop2Pe, backdrop2Pe.x + canvas.width, backdrop2Pe.y);
+
+    if (skyPe.x + assetLoader.imgs.skyPe.width <= 0)
+      skyPe.x = 0;
+    if (backdropPe.x + assetLoader.imgs.backdropPe.width <= 0)
+      backdropPe.x = 0;
+    if (backdrop2Pe.x + assetLoader.imgs.backdrop2Pe.width <= 0)
+      backdrop2Pe.x = 0;
+
     }else if(Me){
+      skyMe.x -= skyMe.speed;
+
+      backdropMe.x -= backdropMe.speed;
+      backdrop2Me.x -= backdrop2Me.speed;
+
+      ctx.drawImage(assetLoader.imgs.bgMe, 0, 0);
+
+      ctx.drawImage(assetLoader.imgs.skyMe, skyMe.x, skyMe.y);
+      ctx.drawImage(assetLoader.imgs.skyMe, skyMe.x + canvas.width, skyMe.y);
+
+      assetLoader.sounds.bgMe.play();
+
+      assetLoader.sounds.bg.pause();
+      assetLoader.sounds.bgAl.pause();
+      assetLoader.sounds.bgPe.pause();
+      assetLoader.sounds.bgFa.pause();
+
+      ctx.drawImage(assetLoader.imgs.backdropMe, backdropMe.x, backdropMe.y);
+      ctx.drawImage(assetLoader.imgs.backdropMe, backdropMe.x + canvas.width, backdropMe.y);
+
+      ctx.drawImage(assetLoader.imgs.backdrop2Me, backdrop2Me.x, backdrop2Me.y);
+      ctx.drawImage(assetLoader.imgs.backdrop2Me, backdrop2Me.x + canvas.width, backdrop2Me.y);
+
+    if (skyMe.x + assetLoader.imgs.skyMe.width <= 0)
+      skyMe.x = 0;
+    if (backdropMe.x + assetLoader.imgs.backdropMe.width <= 0)
+      backdropMe.x = 0;
+    if (backdrop2Me.x + assetLoader.imgs.backdrop2Me.width <= 0)
+      backdrop2Me.x = 0;
 
     }else{
       // Pan background
@@ -459,6 +566,7 @@ var background = (function() {
     Fa=false;
     Pe=false;
     Me=false;
+
   }
 
   return {
@@ -528,7 +636,7 @@ var player = (function(player) {
   // add properties directly to the player imported object
   player.width     = 231.949;
   player.height    = 207.023;
-  player.speed     = 6;
+  player.speed     = 10;
 
   // jumping
   player.gravity   = 1;
@@ -603,6 +711,7 @@ var player = (function(player) {
   player.reset = function() {
     player.x = 64;
     player.y = 250;
+
   };
 
   return player;
@@ -882,14 +991,93 @@ function spawnSprites() {
 function spawnEnvironmentSprites() {
   if (score > 40 && rand(0, 20) === 0 && platformHeight < 3) {
     if (Math.random() > 0.5) {
-      environment.push(new Sprite(
+    	if (Al) {
+    	environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'plantAl'
+      ));
+
+    	}else if(Fa){
+    	environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'plantFa'
+      ));
+
+    	}else if(Pe){
+    	environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'plantPe'
+      ));
+
+    	}else if(Me){
+    	environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'plantMe'
+      ));
+
+    	}else{
+    	environment.push(new Sprite(
         canvas.width + platformWidth % player.speed,
         platformBase - platformHeight * platformSpacer - platformWidth,
         'plant'
       ));
+    	}
     }
     else if (platformLength > 2) {
+    	if(Al){
+    	environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'bush1Al'
+      ));
       environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed + platformWidth,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'bush2Al'
+      ));
+
+    	}else if(Fa){
+    	environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'bush1Fa'
+      ));
+      environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed + platformWidth,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'bush2Fa'
+      ));
+
+    	}else if(Pe){
+    	environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'bush1Pe'
+      ));
+      environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed + platformWidth,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'bush2Pe'
+      ));
+
+    	}else if(Me){
+    	environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'bush1Me'
+      ));
+      environment.push(new Sprite(
+        canvas.width + platformWidth % player.speed + platformWidth,
+        platformBase - platformHeight * platformSpacer - platformWidth,
+        'bush2Me'
+      ));
+
+    	}else{
+    	environment.push(new Sprite(
         canvas.width + platformWidth % player.speed,
         platformBase - platformHeight * platformSpacer - platformWidth,
         'bush1'
@@ -899,6 +1087,7 @@ function spawnEnvironmentSprites() {
         platformBase - platformHeight * platformSpacer - platformWidth,
         'bush2'
       ));
+    	}
     }
   }
 }
@@ -928,32 +1117,12 @@ function animate() {
 
     background.draw();
 
-    // update entities
-    /*if(Al)
-    {
-    	updateWaterAl();
-    	updateEnvironment();
-	    updatePlayer();
-	    updateGround();
-	    updateEnemies();
-    }else if(Fa)
-    {
-    	updateWaterFa();
-    }else if(Pe)
-    {
-    	updateWaterPe();
-    }else if(Me)
-    {
-    	updateWaterMe();
-    }else
-    {*/
-    	updateWater();
-	    updateEnvironment();
-	    updatePlayer();
-	    updateGround();
-	    updateEnemies();
+	updateWater();
+    updateEnvironment();
+    updatePlayer();
+    updateGround();
+    updateEnemies();
 
-    /*}*/
     
     // draw the score
     ctx.fillText('Score: ' + score + 'm', canvas.width - 140, 30);
@@ -1068,7 +1237,21 @@ function startGame() {
   }
 
   for (i = 0; i < canvas.width / 32 + 2; i++) {
-    water.push(new Sprite(i * platformWidth, platformBase, 'water'));
+  	if (Al) {
+  		water.push(new Sprite(i * platformWidth, platformBase, 'waterAl'));
+
+  	}
+  	else if(Fa){
+  		water.push(new Sprite(i * platformWidth, platformBase, 'waterFa'));
+
+  	}else if(Pe){
+  		water.push(new Sprite(i * platformWidth, platformBase, 'waterPe'));
+  	}else if(Me){
+  		water.push(new Sprite(i * platformWidth, platformBase, 'waterMe'));
+  	}
+  	else{
+  		water.push(new Sprite(i * platformWidth, platformBase, 'water'));
+  	}
   }
 
   background.reset();
@@ -1083,6 +1266,16 @@ function startGame() {
   assetLoader.sounds.bgAl.currentTime = 0;
   assetLoader.sounds.bgAl.loop = true;
 
+  assetLoader.sounds.bgFa.currentTime = 0;
+  assetLoader.sounds.bgFa.loop = true;
+
+  assetLoader.sounds.bgPe.currentTime = 0;
+  assetLoader.sounds.bgPe.loop = true;
+
+  assetLoader.sounds.bgMe.currentTime = 0;
+  assetLoader.sounds.bgMe.loop = true;
+
+
 }
 
 /**
@@ -1092,11 +1285,20 @@ function gameOver() {
   stop = true;
   $('#score').html(score);
   $('#game-over').show();
-  assetLoader.sounds.bg.pause();
+  
 
   if (Al) {
     assetLoader.sounds.bgAl.pause();
-  };
+  } else if (Fa) {
+    assetLoader.sounds.bgFa.pause();
+  }else if(Pe){
+  	assetLoader.sounds.bgPe.pause();
+  }else if(Me){
+  	assetLoader.sounds.bgMe.pause();
+  }else{
+  	assetLoader.sounds.bg.pause();
+  }
+
 
   assetLoader.sounds.gameOver.currentTime = 0;
   assetLoader.sounds.gameOver.play();
